@@ -63,7 +63,7 @@ socket.on('message', function(message) {
       sendCurrentUsers(socket);
     } else {
       message.timestamp = moment().valueOf();
-      io.to([socket.id].room).emit('message', message);
+      io.to(clientInfo[socket.id].room).emit('message', message);
     }
 });
 
