@@ -3,8 +3,14 @@ var name = getQueryVariable('name') || 'Anonymous';
 var room = getQueryVariable('room');
 console.log(name + ' joined ' + room);
 
+$('.room-title').text(room);
+
 socket.on('connect', function() {
   console.log('Connected to socket.io server');
+  socket.emit('joinRoom', {
+    name: name,
+    room: room
+  });
 });
 
 socket.on('message', function(message) {
@@ -19,17 +25,13 @@ socket.on('message', function(message) {
 
 // Handles submitting of new message
 var $form = jQuery('#message-form');
-
 $form.on('submit', function(event) {
   //prevents refreshing page(the default for submit)
   event.preventDefault();
   var $message = $form.find('input[name=message]');
-
   socket.emit('message', {
     name: name,
     text: $message.val()
   });
-
   $message.val('');
-
 });
