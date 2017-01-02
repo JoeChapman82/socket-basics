@@ -22,3 +22,7 @@
 .margin-top {
   margin-top: 35px;
 }
+
+img {
+  max-width: 100%;
+}

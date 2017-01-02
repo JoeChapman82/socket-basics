@@ -31,7 +31,6 @@ function sendCurrentUsers(socket) {
 }
 
 io.on('connection', function(socket) {
-  console.log('User connected via socket.io!');
 
 socket.on('disconnect', function() {
   var userData = clientInfo[socket.id];
@@ -57,7 +56,6 @@ socket.on('joinRoom', function(req) {
 });
 
 socket.on('message', function(message) {
-  console.log('Message received: ' + message.text);
 
     if (message.text === '@currentUsers') {
       sendCurrentUsers(socket);
